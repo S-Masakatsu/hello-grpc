@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/metadata"
 
 	"github.com/S-Masakatsu/hello-grpc/bake-pancake/rpc"
 )
@@ -19,6 +20,11 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	md := metadata.Pairs(
+		"authorization", "bearer hi/mi/tsu",
+	)
+	ctx = metadata.NewOutgoingContext(ctx, md)
 
 	var input string
 	for {
